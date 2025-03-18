@@ -3,5 +3,7 @@ public class Main {
 
         Rettangolo r = new Rettangolo();
         r.calcolaArea();
+        Triangolo t = new Triangolo();
+        t.calcolaArea();
     }
 }

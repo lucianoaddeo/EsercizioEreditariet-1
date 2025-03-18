@@ -1,7 +1,7 @@
 public class Rettangolo extends Forma{
 
-    public double altezza;
-    public double base;
+    private double altezza;
+    private double base;
 
     public Rettangolo(){
         altezza = 10.4;
