@@ -1,52 +1,50 @@
-abstract class Forma {
-    protected double base, altezza;
 
-    Forma(double base, double altezza) { // Costruttore per le sottoclassi
-        this.base = base;
-        this.altezza = altezza;
-    }
-
-    abstract double calcolaArea();
+interface Forma{
+    double calcolaArea();
 }
 
-class Triangolo extends Forma {
+class Triangolo implements Forma{
 
-    Triangolo() { // Costruttore senza parametri
-        super(4, 10);
+    private double altezza, base;
+
+    public Triangolo(double b, double a){
+        altezza = a;
+        base = b;
     }
 
-    Triangolo(double base, double altezza) { // Costruttore parametrizzato
-        super(base, altezza);
-    }
-
+    //per le interfacce
+    //tutti i metodi sono pubblici e astratti per default.
+    //meglio sempre evitre gestioni implicite, a favore di quelle esplicite
     @Override
-    double calcolaArea() {
-        return base * altezza * 0.5;
+    public double calcolaArea(){
+        return  base*altezza*0.5;
     }
 }
 
-class Rettangolo extends Forma {
+class Rettangolo implements Forma{
+    private double altezza, base;
 
-    Rettangolo() { // Costruttore senza parametri
-        super(5, 10);
+    public Rettangolo(double b, double a){
+        altezza = a;
+        base = b;
     }
 
-    Rettangolo(double base, double altezza) { // Costruttore parametrizzato
-        super(base, altezza);
-    }
-
+    //per le interfacce
+    //tutti i metodi sono pubblici e astratti per default.
+    //meglio sempre evitre gestioni implicite, a favore di quelle esplicite
     @Override
-    double calcolaArea() {
-        return base * altezza;
+    public double calcolaArea(){
+        return  base*altezza;
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Forma triangolo = new Triangolo();
-        System.out.println("Area del triangolo: " + triangolo.calcolaArea());
 
-        Forma rettangolo = new Rettangolo(2, 3);
-        System.out.println("Area del rettangolo: " + rettangolo.calcolaArea());
+        Forma t = new Triangolo(2,3);
+        System.out.println(t.calcolaArea());
+
+        Forma r = new Rettangolo(3,5);
+        System.out.println(r.calcolaArea());
     }
 }
