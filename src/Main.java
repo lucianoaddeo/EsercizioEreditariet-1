@@ -1,63 +1,52 @@
-public class Main {
-    public static void main(String[] args) {
-        Triangolo t = new Triangolo(2, 4);
-        Rettangolo r = new Rettangolo(1, 3);
-        t.calcolaArea();
-        r.calcolaArea();
+abstract class Forma {
+    protected double base, altezza;
+
+    Forma(double base, double altezza) { // Costruttore per le sottoclassi
+        this.base = base;
+        this.altezza = altezza;
     }
 
-
-}
-
-enum TipoForma {
-    RETTANGOLO,
-    TRIANGOLO
-}
-
-abstract class Forma {
-    //medodo astratto
-    abstract void calcolaArea();
-
-    //attributo comune alle classi figlie
-    TipoForma tipo;
+    abstract double calcolaArea();
 }
 
 class Triangolo extends Forma {
 
-    private double altezza, base;
+    Triangolo() { // Costruttore senza parametri
+        super(4, 10);
+    }
 
-    Triangolo(double a, double b) {
-        altezza = a;
-        base = b;
-
-        //non è una variabile globale!
-        //È una costante definita dentro TipoForma.
-        //Quindi, per accedervi, dobbiamo specificare il suo "contenitore"
-        tipo = TipoForma.TRIANGOLO;
+    Triangolo(double base, double altezza) { // Costruttore parametrizzato
+        super(base, altezza);
     }
 
     @Override
-    public void calcolaArea() {
-        System.out.println("L'area del " + tipo.toString().toLowerCase() + " è =" + altezza * base * 0.5);
+    double calcolaArea() {
+        return base * altezza * 0.5;
     }
 }
 
 class Rettangolo extends Forma {
 
-    private double altezza, base;
+    Rettangolo() { // Costruttore senza parametri
+        super(5, 10);
+    }
 
-    Rettangolo(double a, double b) {
-        altezza = a;
-        base = b;
-
-        //non è una variabile globale!
-        //È una costante definita dentro TipoForma.
-        //Quindi, per accedervi, dobbiamo specificare il suo "contenitore"
-        tipo = TipoForma.RETTANGOLO;
+    Rettangolo(double base, double altezza) { // Costruttore parametrizzato
+        super(base, altezza);
     }
 
     @Override
-    public void calcolaArea() {
-        System.out.println("L'area del " + tipo.toString().toLowerCase() + " è =" + altezza * base);
+    double calcolaArea() {
+        return base * altezza;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Forma triangolo = new Triangolo();
+        System.out.println("Area del triangolo: " + triangolo.calcolaArea());
+
+        Forma rettangolo = new Rettangolo(2, 3);
+        System.out.println("Area del rettangolo: " + rettangolo.calcolaArea());
     }
 }
