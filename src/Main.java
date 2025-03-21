@@ -1,17 +1,63 @@
 public class Main {
     public static void main(String[] args) {
-
-        System.out.println(comparaStringhe("Giorgio", "Giorgio"));
-        System.out.println(comparaStringhe("Giorgio", "giorgio"));
+        Triangolo t = new Triangolo(2, 4);
+        Rettangolo r = new Rettangolo(1, 3);
+        t.calcolaArea();
+        r.calcolaArea();
     }
 
-    public static StringBuilder comparaStringhe(String s1, String s2) {
 
-        StringBuilder risultato = new StringBuilder("Le due stringhe sono ");
+}
 
-        if (s1.compareTo(s2) == 0)
-            return risultato.append("uguali");
-        else
-            return risultato.append("differenti");
+enum TipoForma {
+    RETTANGOLO,
+    TRIANGOLO
+}
+
+abstract class Forma {
+    //medodo astratto
+    abstract void calcolaArea();
+
+    //attributo comune alle classi figlie
+    TipoForma tipo;
+}
+
+class Triangolo extends Forma {
+
+    private double altezza, base;
+
+    Triangolo(double a, double b) {
+        altezza = a;
+        base = b;
+
+        //non è una variabile globale!
+        //È una costante definita dentro TipoForma.
+        //Quindi, per accedervi, dobbiamo specificare il suo "contenitore"
+        tipo = TipoForma.TRIANGOLO;
+    }
+
+    @Override
+    public void calcolaArea() {
+        System.out.println("L'area del " + tipo.toString().toLowerCase() + " è =" + altezza * base * 0.5);
+    }
+}
+
+class Rettangolo extends Forma {
+
+    private double altezza, base;
+
+    Rettangolo(double a, double b) {
+        altezza = a;
+        base = b;
+
+        //non è una variabile globale!
+        //È una costante definita dentro TipoForma.
+        //Quindi, per accedervi, dobbiamo specificare il suo "contenitore"
+        tipo = TipoForma.RETTANGOLO;
+    }
+
+    @Override
+    public void calcolaArea() {
+        System.out.println("L'area del " + tipo.toString().toLowerCase() + " è =" + altezza * base);
     }
 }
